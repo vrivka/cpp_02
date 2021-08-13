@@ -6,10 +6,10 @@
 class Fixed {
 private:
 	int RawBits;
-	static const int FracionalBits;
+	static int const FracionalBits;
 public:
 	int getRawBits( void ) const;
-	void setRawBits( int const raw );
+	void setRawBits( int const );
 	Fixed();
 	Fixed( Fixed & );
 	~Fixed();

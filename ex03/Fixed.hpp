@@ -7,16 +7,16 @@
 class Fixed {
 private:
 	int RawBits;
-	static const int FracionalBits;
+	static int const FracionalBits;
 public:
-	int getRawBits( void ) const;
-	void setRawBits( int const raw );
-	float toFloat( void ) const;
-	int toInt(void) const;
+	int getRawBits() const;
+	void setRawBits( int const );
+	float toFloat() const;
+	int toInt() const;
 	static Fixed &min( Fixed &, Fixed & );
-	static Fixed &max( Fixed &, Fixed &);
-	static Fixed const min( Fixed const, Fixed const  );
-	static Fixed  const max( Fixed const , Fixed const );
+	static Fixed &max( Fixed &, Fixed & );
+	static Fixed const &min( Fixed const &, Fixed const & );
+	static Fixed const &max( Fixed const &, Fixed const & );
 	Fixed();
 	Fixed( int const );
 	Fixed( float const );
@@ -33,12 +33,12 @@ public:
 	Fixed operator-( Fixed const & ) const;
 	Fixed operator*( Fixed const & ) const;
 	Fixed operator/( Fixed const & ) const;
-	Fixed &operator++( void );
+	Fixed &operator++();
 	Fixed operator++( int );
-	Fixed &operator--( void );
+	Fixed &operator--();
 	Fixed operator--( int );
 };
 
-std::ostream &operator<<( std::ostream & o, Fixed const & fixed);
+std::ostream &operator<<( std::ostream &, Fixed const & );
 
 #endif
