@@ -2,19 +2,21 @@
 
 int const Fixed::FracionalBits = 8;
 
-Fixed::Fixed() : RawBits(0) {}
-
-Fixed::Fixed( float const f ) {
-	this->RawBits = (int)roundf(f * (1 << Fixed::FracionalBits));
+Fixed &Fixed::min( Fixed &a, Fixed &b ) {
+	return a > b ? b : a;
 }
 
-Fixed::Fixed( int const i ) {
-	this->RawBits = i << Fixed::FracionalBits;
+Fixed &Fixed::max( Fixed &a, Fixed &b ) {
+	return a < b ? b : a;
 }
 
-Fixed::Fixed( Fixed const &other ) : RawBits(other.RawBits) {}
+Fixed const &Fixed::min( Fixed const &a, Fixed const &b ) {
+	return a > b ? b : a;
+}
 
-Fixed::~Fixed() {}
+Fixed const &Fixed::max( Fixed const &a, Fixed const &b ) {
+	return a < b ? b : a;
+}
 
 int Fixed::getRawBits() const {
 	return RawBits;
@@ -32,21 +34,19 @@ float Fixed::toFloat() const {
 	return (float)this->RawBits / (1 << Fixed::FracionalBits);
 }
 
-Fixed &Fixed::min( Fixed &a, Fixed &b ) {
-	return a > b ? b : a;
+Fixed::Fixed() : RawBits(0) {}
+
+Fixed::Fixed( float const f ) {
+	this->RawBits = (int)roundf(f * (1 << Fixed::FracionalBits));
 }
 
-Fixed &Fixed::max( Fixed &a, Fixed &b ) {
-	return a < b ? b : a;
+Fixed::Fixed( int const i ) {
+	this->RawBits = i << Fixed::FracionalBits;
 }
 
-Fixed const &Fixed::min( Fixed const &a, Fixed const &b ) {
-	return a > b ? b : a;
-}
+Fixed::Fixed( Fixed const &other ) : RawBits(other.RawBits) {}
 
-Fixed const &Fixed::max( Fixed const &a, Fixed const &b ) {
-	return a < b ? b : a;
-}
+Fixed::~Fixed() {}
 
 bool Fixed::operator>( Fixed const &other ) const {
 	return this->RawBits > other.RawBits;

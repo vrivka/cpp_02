@@ -2,6 +2,24 @@
 
 int const Fixed::FracionalBits = 8;
 
+int Fixed::toInt() const {
+	return (this->RawBits >> Fixed::FracionalBits);
+}
+
+float Fixed::toFloat() const {
+	return ((float)this->RawBits / (1 << Fixed::FracionalBits));
+}
+
+int Fixed::getRawBits() const {
+	std::cout << "getRawBits member function called\n";
+	return RawBits;
+}
+
+void Fixed::setRawBits( int const raw ) {
+	std::cout << "setRawBits member function called\n";
+	this->RawBits = raw;
+}
+
 Fixed::Fixed() : RawBits(0) {
 	std::cout << "Default constructor called\n";
 }
@@ -25,27 +43,9 @@ Fixed::~Fixed() {
 	std::cout << "Destructor called\n";
 }
 
-int Fixed::getRawBits() const {
-	std::cout << "getRawBits member function called\n";
-	return RawBits;
-}
-
-void Fixed::setRawBits( int const raw ) {
-	std::cout << "setRawBits member function called\n";
-	this->RawBits = raw;
-}
-
-int Fixed::toInt() const {
-	return (this->RawBits >> Fixed::FracionalBits);
-}
-
-float Fixed::toFloat() const {
-	return ((float)this->RawBits / (1 << Fixed::FracionalBits));
-}
-
 Fixed &Fixed::operator=( Fixed const &other ) {
 	std::cout << "Assignation operator called\n";
-	this->RawBits = other.getRawBits();
+	this->RawBits = other.RawBits;
 	return *this;
 }
 
